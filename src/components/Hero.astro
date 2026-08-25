@@ -1,0 +1,120 @@
+---
+const pillars = [
+  { title: "Webdevelopment", desc: "Moderne, schnelle Websites statt Baukasten-Loesungen.", href: "/webdevelopment" },
+  { title: "Softwareentwicklung", desc: "Massgeschneiderte Tools fuer eure Prozesse.", href: "/softwaredevelopment" },
+  { title: "E-Rechnung", desc: "Rechtssichere Umstellung, ohne Kopfschmerzen.", href: "/e-rechnung" },
+];
+---
+
+<section class="hero">
+  <h1>Digitale Loesungen, die halten, was sie versprechen.</h1>
+  <p>Webdevelopment, Softwareentwicklung und E-Rechnungs-Beratung aus einer Hand.</p>
+  <a href="/kontakt" class="cta">Projekt besprechen</a>
+</section>
+
+<section class="pillars">
+  {pillars.map((p) => (
+    <a href={p.href} class="pillar-card">
+      <h2>{p.title}</h2>
+      <p>{p.desc}</p>
+    </a>
+  ))}
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: #0b0b0f;
+    padding: 2rem;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(circle at 20% 30%, #7C6EE0 0%, transparent 45%),
+      radial-gradient(circle at 80% 20%, #A79BF0 0%, transparent 40%),
+      radial-gradient(circle at 50% 80%, #5F4FC9 0%, transparent 50%);
+    filter: blur(80px);
+    opacity: 0.55;
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(4%, -3%) scale(1.08); }
+  }
+  .hero h1 {
+    position: relative;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    background: linear-gradient(90deg, #ffffff 20%, #A79BF0 60%, #7C6EE0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    max-width: 900px;
+  }
+  .hero p {
+    position: relative;
+    color: #cfcfe0;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-top: 1rem;
+  }
+  .cta {
+    position: relative;
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.9rem 1.8rem;
+    background: #7C6EE0;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    padding: 3rem 2rem;
+    background: #0b0b0f;
+  }
+  .pillar-card {
+    position: relative;
+    background: #16161c;
+    border: 1px solid rgba(124, 110, 224, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 2rem;
+    text-decoration: none;
+    color: white;
+  }
+  .pillar-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(300px circle at var(--x, 50%) var(--y, 50%), rgba(124,110,224,0.25), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .pillar-card:hover::before { opacity: 1; }
+  .pillar-card h2 { margin: 0 0 0.5rem; }
+  .pillar-card p { color: #b4b4c4; margin: 0; }
+</style>
+
+<script>
+  document.querySelectorAll(".pillar-card").forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--x", `${e.clientX - rect.left}px`);
+      card.style.setProperty("--y", `${e.clientY - rect.top}px`);
+    });
+  });
+</script>
