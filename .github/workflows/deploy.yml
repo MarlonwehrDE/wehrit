@@ -22,12 +22,13 @@ jobs:
       - name: Website bauen
         run: npm run build
 
-      - name: Per rsync auf den VPS deployen
-        uses: burnett01/rsync-deployments@7.0.1
+      - name: SSH-Key laden
+        uses: webfactory/ssh-agent@v0.9.0
         with:
-          switches: -avzr --delete
-          path: dist/
-          remote_path: /srv/websites/wehrit/dist/
-          remote_host: ${{ secrets.VPS_HOST }}
-          remote_user: ${{ secrets.VPS_USER }}
-          remote_key: ${{ secrets.VPS_SSH_KEY }}
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Host-Key vertrauen
+        run: mkdir -p ~/.ssh && ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Per rsync deployen
+        run: rsync -avzr --delete dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/srv/websites/wehrit/dist/
