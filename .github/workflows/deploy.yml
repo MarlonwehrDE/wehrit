@@ -1,4 +1,4 @@
-name: Deploy Wehrit
+﻿name: Deploy Wehrit
 
 on:
   push:
