@@ -407,6 +407,48 @@ const projects = [
   :global([data-theme="light"]) .project-link {
     color: color-mix(in srgb, var(--card-accent) 70%, #1e1b3a);
   }
+
+  @media (max-width: 768px) {
+    .projects-section {
+      padding: var(--space-16) 0;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-8);
+    }
+
+    .project-body {
+      padding: var(--space-4);
+    }
+
+    .project-header {
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .projects-section {
+      padding: var(--space-12) 0;
+    }
+
+    .project-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .project-initial {
+      font-size: var(--text-base);
+    }
+
+    .project-name {
+      font-size: var(--text-lg);
+    }
+
+    .project-task {
+      font-size: var(--text-xs);
+    }
+  }
 </style>
 
 <script>

@@ -114,7 +114,33 @@ const services = [
 
   @media (min-width: 768px) {
     .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-grid {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .services-section {
+      padding: var(--space-16) 0;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-8);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services-section {
+      padding: var(--space-12) 0;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-6);
     }
   }
 

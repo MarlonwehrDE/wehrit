@@ -79,4 +79,32 @@ import LiquidBlob from './fx/LiquidBlob.astro';
   .cta-actions {
     margin-top: var(--space-6);
   }
+
+  @media (max-width: 768px) {
+    .contact-cta {
+      padding: var(--space-16) 0;
+    }
+
+    .cta-content {
+      padding: var(--space-10) var(--space-4);
+    }
+
+    .cta-title {
+      font-size: var(--text-2xl);
+    }
+
+    .cta-desc {
+      font-size: var(--text-base);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-cta {
+      padding: var(--space-12) 0;
+    }
+
+    .cta-content {
+      padding: var(--space-8) var(--space-3);
+    }
+  }
 </style>

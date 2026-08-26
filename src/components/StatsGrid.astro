@@ -81,6 +81,26 @@ const stats = [
     }
   }
 
+  @media (max-width: 768px) {
+    .stats-section {
+      padding: var(--space-16) 0;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-8);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-section {
+      padding: var(--space-12) 0;
+    }
+
+    .stats-grid {
+      gap: var(--space-3);
+    }
+  }
+
   .stat-icon {
     font-size: 1.5rem;
     margin-bottom: var(--space-3);

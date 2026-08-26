@@ -244,12 +244,54 @@ import HeroVisual from './HeroVisual.astro';
     color: var(--color-text-muted);
   }
 
+  @media (max-width: 768px) {
+    .hero {
+      padding-top: var(--space-20);
+      padding-bottom: var(--space-8);
+      min-height: auto;
+    }
+
+    .hero-grid {
+      gap: var(--space-6);
+    }
+
+    .hero-trust {
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .trust-item {
+      padding: var(--space-1) var(--space-2);
+      font-size: 0.7rem;
+    }
+  }
+
   @media (max-width: 640px) {
     .hero-actions {
       flex-direction: column;
     }
     .hero-scroll-indicator {
       display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding-top: var(--space-16);
+      padding-bottom: var(--space-6);
+    }
+
+    .hero-badge {
+      font-size: 0.65rem;
+      padding: var(--space-1) var(--space-3);
+    }
+
+    .hero-content {
+      gap: var(--space-4);
+    }
+
+    .hero-subtitle {
+      font-size: var(--text-base);
     }
   }
 </style>
