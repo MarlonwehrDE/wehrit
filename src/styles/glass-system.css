@@ -380,6 +380,49 @@
 
 /* ---- Reduced Motion ---- */
 
+/* ---- Mobile Performance Reduction ---- */
+
+@media (max-width: 768px) {
+  .glass-thin,
+  .glass-medium {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .glass-thick,
+  .glass-ultra {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-thin::before,
+  .glass-medium::before,
+  .glass-thick::before,
+  .glass-ultra::before {
+    display: none;
+  }
+
+  .glass-thin::after,
+  .glass-medium::after,
+  .glass-thick::after,
+  .glass-ultra::after {
+    display: none;
+  }
+
+  .glass-specular,
+  .glass-fresnel {
+    display: none;
+  }
+
+  [data-reveal] {
+    filter: none;
+  }
+
+  [data-reveal].revealed {
+    filter: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .glass-specular::before {
     transition: none;

@@ -89,4 +89,16 @@ if (tilt) attrs['data-tilt'] = '';
     perspective: 800px;
     transform-style: preserve-3d;
   }
+
+  @media (max-width: 768px) {
+    .glass-card-content {
+      padding: var(--space-6);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .glass-card-content {
+      padding: var(--space-4);
+    }
+  }
 </style>
