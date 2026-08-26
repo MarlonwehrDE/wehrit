@@ -1,0 +1,129 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import GlassCard from '../components/ui/GlassCard.astro';
+import GlassButton from '../components/ui/GlassButton.astro';
+---
+
+<PageLayout
+  title="Über mich"
+  headline="Hi, ich bin Marlon."
+  subtitle="Webentwickler und Softwareentwickler mit Leidenschaft für durchdachte digitale Lösungen."
+>
+  <div class="about-portrait" data-reveal>
+    <div class="portrait-wrap">
+      <img
+        src="/images/portrait/MarlonWehrImWehrIT_Tshirt.png"
+        alt="Marlon Wehr"
+        class="portrait-img"
+        width="600"
+        height="750"
+        loading="eager"
+      />
+    </div>
+  </div>
+
+  <div class="about-content" data-reveal>
+    <GlassCard level="medium" interactive>
+      <div class="about-text">
+        <p>
+          Ich bin Marlon Wehr, Gründer von WehrIT. Ich helfe Unternehmen dabei, ihre digitale Präsenz auf ein neues Level zu bringen — mit modernen Websites, maßgeschneiderter Software und professioneller E-Rechnungs-Beratung.
+        </p>
+        <p>
+          Mein Ansatz: Maßgeschneiderte Lösungen statt Baukasten — von der Technologie bis zum Design. Sauberer, performanter Code, der genau das tut, was er soll. Schnell, sicher, wartbar.
+        </p>
+        <p>
+          Ob du eine neue Website brauchst, einen Prozess automatisieren willst oder Hilfe bei der E-Rechnungs-Umstellung suchst — ich finde die richtige Lösung für dich.
+        </p>
+      </div>
+    </GlassCard>
+  </div>
+
+  <div class="about-skills" data-reveal data-reveal-stagger>
+    <h2 class="skills-title" data-reveal>Was ich mitbringe</h2>
+    <div class="skills-grid">
+      {['Astro / HTML / CSS', 'TypeScript / JavaScript', 'Node.js', 'Python', 'CI/CD & DevOps', 'E-Rechnungs-Standards'].map((skill) => (
+        <GlassCard level="thin" interactive class="skill-card" data-reveal>
+          <span>{skill}</span>
+        </GlassCard>
+      ))}
+    </div>
+  </div>
+
+  <div class="about-cta" data-reveal>
+    <GlassButton variant="primary" data-contact-modal>Lass uns zusammenarbeiten</GlassButton>
+  </div>
+</PageLayout>
+
+<style>
+  .about-portrait {
+    margin-bottom: var(--space-12);
+    display: flex;
+    justify-content: center;
+  }
+
+  .portrait-wrap {
+    max-width: 320px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .portrait-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about-text p {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .about-skills {
+    margin-top: var(--space-16);
+  }
+
+  .skills-title {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-bottom: var(--space-8);
+    background: linear-gradient(135deg, var(--color-text), var(--color-primary-300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  :global(.skill-card) {
+    text-align: center;
+  }
+
+  :global(.skill-card) span {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+
+  .about-cta {
+    margin-top: var(--space-16);
+    text-align: center;
+  }
+</style>

@@ -1,0 +1,121 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+import GlassButton from '../../components/ui/GlassButton.astro';
+---
+
+<PageLayout
+  title="ULGlass"
+  headline="ULGlass"
+  subtitle="Glasindustrie & Ofenbau — Vom Web bis zur Büroautomatisierung."
+>
+  <div class="project-content">
+    <div class="project-logo-area" data-reveal>
+      <img src="/images/projekte/ulglass/LogoUlglass.png" alt="ULGlass Logo" class="project-logo" />
+    </div>
+
+    <div class="project-intro" data-reveal>
+      <GlassCard level="medium" interactive>
+        <h2>Das Projekt</h2>
+        <p>
+          ULGlass ist ein Unternehmen in der Glasindustrie und im Ofenbau. Neben der kompletten Website habe ich das gesamte Büro mit VBA-Automatisierung digitalisiert — von Inventur über Rechnungen bis zur Kundenverwaltung.
+        </p>
+      </GlassCard>
+    </div>
+
+    <div class="project-features" data-reveal data-reveal-stagger>
+      {[
+        { title: 'Homepage', desc: 'Komplettes Design & Entwicklung der Unternehmenswebsite. Professioneller Auftritt für die Glasindustrie.' },
+        { title: 'VBA-Automatisierung', desc: 'Automatisierung des gesamten Büros: Inventur, Rechnungen, Angebote und Preisgestaltung — alles per Knopfdruck.' },
+        { title: 'Cloud-Anbindung', desc: 'Moderne Cloud-Infrastruktur für standortunabhängiges Arbeiten und sichere Datenverwaltung.' },
+        { title: 'Gehalt & Verwaltung', desc: 'Digitale Gehaltsstrukturen, Kundenverwaltung und Reporting — das komplette Büro in einem System.' },
+      ].map((f) => (
+        <GlassCard level="thin" interactive tilt data-reveal>
+          <h3>{f.title}</h3>
+          <p>{f.desc}</p>
+        </GlassCard>
+      ))}
+    </div>
+
+    <div class="project-cta" data-reveal>
+      <GlassButton href="https://ulglass.de" variant="primary" target="_blank" rel="noopener noreferrer">ulglass.de besuchen</GlassButton>
+      <GlassButton href="/kontakt">Ähnliches Projekt anfragen</GlassButton>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .project-content {
+    margin-top: var(--space-8);
+  }
+
+  .project-logo-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .project-logo {
+    max-width: 200px;
+    height: auto;
+    filter: drop-shadow(0 4px 20px rgba(4, 96, 159, 0.3));
+  }
+
+  .project-intro h2 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, var(--color-text), var(--accent-gradient-end, #3a9de0));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) .project-intro h2 {
+      --accent-gradient-end: #04609F;
+    }
+  }
+
+  :global([data-theme="light"]) .project-intro h2 {
+    --accent-gradient-end: #04609F;
+  }
+
+  .project-intro p {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .project-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .project-features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .project-features h3 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+
+  .project-features p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .project-cta {
+    margin-top: var(--space-16);
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+</style>

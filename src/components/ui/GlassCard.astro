@@ -1,0 +1,92 @@
+---
+interface Props {
+  level?: 'thin' | 'medium' | 'thick' | 'ultra';
+  interactive?: boolean;
+  iridescent?: boolean;
+  tilt?: boolean;
+  as?: string;
+  href?: string;
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  level = 'medium',
+  interactive = false,
+  iridescent = false,
+  tilt = false,
+  as: Tag = 'div',
+  href,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const classes = [
+  `glass-${level}`,
+  interactive && 'glass-interactive',
+  iridescent && 'glass-iridescent',
+  className,
+].filter(Boolean).join(' ');
+
+const attrs: Record<string, any> = { ...rest };
+if (href) attrs.href = href;
+if (tilt) attrs['data-tilt'] = '';
+---
+
+{tilt ? (
+  <div class="glass-tilt-wrap">
+    <Tag class:list={[classes, 'glass-card']} {...attrs}>
+      <div class="glass-inner-layers">
+        <div class="glass-specular" />
+        <div class="glass-fresnel" />
+        {interactive && <div class="glass-light" />}
+      </div>
+      <div class="glass-card-content">
+        <slot />
+      </div>
+    </Tag>
+  </div>
+) : (
+  <Tag class:list={[classes, 'glass-card']} {...attrs}>
+    <div class="glass-inner-layers">
+      <div class="glass-specular" />
+      <div class="glass-fresnel" />
+      {interactive && <div class="glass-light" />}
+    </div>
+    <div class="glass-card-content">
+      <slot />
+    </div>
+  </Tag>
+)}
+
+<style>
+  .glass-card {
+    display: block;
+    color: var(--color-text);
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+      border-color var(--duration-slow) var(--ease-glass),
+      box-shadow var(--duration-slow) var(--ease-glass);
+  }
+
+  .glass-card:hover {
+    box-shadow:
+      0 4px 48px 0 var(--glass-shadow-ambient),
+      0 16px 48px -8px var(--glass-shadow-cast),
+      0 6px 32px -4px var(--glass-shadow-colored),
+      inset 0 0 60px 0 rgba(124, 110, 224, 0.10);
+    --refraction-opacity: 0.08;
+  }
+
+  .glass-card-content {
+    position: relative;
+    z-index: 4;
+    padding: var(--space-8);
+  }
+
+  .glass-tilt-wrap {
+    perspective: 800px;
+    transform-style: preserve-3d;
+  }
+</style>

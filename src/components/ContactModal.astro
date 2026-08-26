@@ -1,0 +1,285 @@
+---
+import GlassButton from './ui/GlassButton.astro';
+import { contact } from '../config/contact';
+---
+
+<div class="contact-modal" id="contact-modal" aria-hidden="true">
+  <div class="contact-modal-backdrop" data-modal-close></div>
+  <div class="contact-modal-card glass-thick">
+    <div class="glass-inner-layers">
+      <div class="glass-specular" />
+      <div class="glass-fresnel" />
+    </div>
+    <button class="contact-modal-close" data-modal-close aria-label="Schließen" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <div class="contact-modal-content">
+      <h2 class="contact-modal-title">Kontakt aufnehmen</h2>
+      <p class="contact-modal-subtitle">Schreib mir eine Nachricht und ich melde mich innerhalb von 24 Stunden.</p>
+      <div class="contact-info">
+        <a href={`mailto:${contact.email}`} class="contact-info-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>{contact.email}</span>
+        </a>
+        <a href={`tel:${contact.phoneRaw}`} class="contact-info-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>{contact.phone}</span>
+        </a>
+      </div>
+      <form class="contact-form" method="POST" action="#">
+        <div class="form-group">
+          <label for="modal-name">Name</label>
+          <input type="text" id="modal-name" name="name" required class="glass-input" placeholder="Dein Name" />
+        </div>
+        <div class="form-group">
+          <label for="modal-email">E-Mail</label>
+          <input type="email" id="modal-email" name="email" required class="glass-input" placeholder="deine@email.de" />
+        </div>
+        <div class="form-group">
+          <label for="modal-subject">Betreff</label>
+          <select id="modal-subject" name="subject" class="glass-input">
+            <option value="webdesign">Webdesign</option>
+            <option value="software">Softwareentwicklung</option>
+            <option value="e-rechnung">E-Rechnung</option>
+            <option value="sonstiges">Sonstiges</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="modal-message">Nachricht</label>
+          <textarea id="modal-message" name="message" rows="4" required class="glass-input" placeholder="Erzähl mir von deinem Projekt..."></textarea>
+        </div>
+        <GlassButton variant="primary">Nachricht senden</GlassButton>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .contact-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .contact-modal[aria-hidden="false"] {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .contact-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    background: rgba(0, 0, 0, 0);
+    transition:
+      backdrop-filter 0.3s var(--ease-glass),
+      -webkit-backdrop-filter 0.3s var(--ease-glass),
+      background 0.3s var(--ease-glass);
+  }
+
+  .contact-modal[aria-hidden="false"] .contact-modal-backdrop {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  :global([data-theme="light"]) .contact-modal[aria-hidden="false"] .contact-modal-backdrop {
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .contact-modal-card {
+    position: relative;
+    width: min(560px, 92vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.92);
+    opacity: 0;
+    transition:
+      transform 0.35s var(--ease-spring),
+      opacity 0.35s var(--ease-glass);
+    transition-delay: 0s;
+  }
+
+  .contact-modal[aria-hidden="false"] .contact-modal-card {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 0.15s;
+  }
+
+  .contact-modal-close {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: var(--glass-bg-thin);
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: var(--radius-pill);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+      background var(--duration-fast) var(--ease-glass),
+      color var(--duration-fast) var(--ease-glass);
+  }
+
+  .contact-modal-close:hover {
+    background: var(--glass-bg-medium);
+    color: var(--color-text);
+  }
+
+  .contact-modal-content {
+    position: relative;
+    z-index: 4;
+    padding: var(--space-10) var(--space-8) var(--space-8);
+  }
+
+  .contact-modal-title {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-text), var(--color-primary-300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: var(--space-2);
+  }
+
+  .contact-modal-subtitle {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5, 1.25rem);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .form-group label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+
+  .glass-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--glass-bg-thin);
+    border: 1px solid var(--glass-border-medium);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow:
+      inset 0 1px 0 0 var(--glass-inner-glow),
+      inset 0 0 0 1px var(--glass-edge-glow);
+    transition:
+      border-color var(--duration-fast) var(--ease-glass),
+      box-shadow var(--duration-fast) var(--ease-glass);
+    outline: none;
+  }
+
+  .glass-input:focus {
+    border-color: var(--color-primary-400);
+    box-shadow:
+      inset 0 1px 0 0 var(--glass-inner-glow),
+      inset 0 0 0 1px var(--glass-edge-glow),
+      0 0 0 3px rgba(124, 110, 224, 0.15),
+      0 0 16px 0 rgba(124, 110, 224, 0.08);
+  }
+
+  .glass-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  textarea.glass-input {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  select.glass-input {
+    cursor: pointer;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--glass-border-subtle);
+  }
+
+  .contact-info-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-primary-300);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-glass);
+  }
+
+  .contact-info-item:hover {
+    color: var(--color-primary-200);
+  }
+
+  .contact-info-item svg {
+    flex-shrink: 0;
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("contact-modal")!;
+
+  function openContactModal() {
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeContactModal() {
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  (window as any).openContactModal = openContactModal;
+
+  document.querySelectorAll("[data-contact-modal]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      openContactModal();
+    });
+  });
+
+  modal.querySelectorAll("[data-modal-close]").forEach((el) => {
+    el.addEventListener("click", closeContactModal);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") {
+      closeContactModal();
+    }
+  });
+</script>

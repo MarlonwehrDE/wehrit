@@ -1,12 +1,26 @@
 ---
+import GlassNav from './ui/GlassNav.astro';
+
+const links = [
+  {
+    label: 'Leistungen',
+    href: '/#leistungen',
+    children: [
+      { label: 'Webdesign', href: '/webdesign' },
+      { label: 'Softwareentwicklung', href: '/softwareentwicklung' },
+      { label: 'E-Rechnung', href: '/e-rechnung' },
+    ],
+  },
+  {
+    label: 'Projekte',
+    href: '/projekte',
+    children: [
+      { label: 'Schickster', href: '/projekte/schickster' },
+      { label: 'ULGlass', href: '/projekte/ulglass' },
+    ],
+  },
+  { label: 'Über mich', href: '/ueber-mich' },
+];
 ---
-<header class="site-header">
-<nav>
-<a href="/" class="logo">Wehrit</a>
-<ul>
-<li><a href="/">Start</a></li>
-<li><a href="/blog">Blog</a></li>
-<li><a href="/#kontakt">Kontakt</a></li>
-</ul>
-</nav>
-</header>
+
+<GlassNav links={links} />

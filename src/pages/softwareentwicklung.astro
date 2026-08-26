@@ -1,0 +1,91 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import GlassCard from '../components/ui/GlassCard.astro';
+import GlassButton from '../components/ui/GlassButton.astro';
+---
+
+<PageLayout
+  title="Softwareentwicklung"
+  headline="Software, die Probleme löst."
+  subtitle="Maßgeschneiderte Tools und Automatisierungen für eure Prozesse."
+>
+  <div class="service-content">
+    <div class="service-intro" data-reveal>
+      <GlassCard level="medium" interactive>
+        <h2>Individuelle Lösungen</h2>
+        <p>
+          Standard-Software passt selten perfekt. Ich entwickle genau das Tool, das ihr braucht — ob interne Dashboards, Automatisierungen, API-Integrationen oder Datenverarbeitung. Kein Overhead, keine unnötige Komplexität.
+        </p>
+      </GlassCard>
+    </div>
+
+    <div class="service-features" data-reveal data-reveal-stagger>
+      {[
+        { title: 'Prozess-Automatisierung', desc: 'Wiederkehrende Aufgaben automatisieren, Zeit sparen, Fehler reduzieren.' },
+        { title: 'API-Integrationen', desc: 'Eure Systeme miteinander verbinden — nahtlos und zuverlässig.' },
+        { title: 'Dashboards & Tools', desc: 'Interne Tools, die genau das tun, was ihr braucht.' },
+        { title: 'Beratung', desc: 'Technische Beratung und Architektur-Reviews für bestehende Systeme.' },
+      ].map((f) => (
+        <GlassCard level="thin" interactive tilt data-reveal>
+          <h3>{f.title}</h3>
+          <p>{f.desc}</p>
+        </GlassCard>
+      ))}
+    </div>
+
+    <div class="service-cta" data-reveal>
+      <GlassButton href="/kontakt" variant="primary">Projekt besprechen</GlassButton>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .service-content {
+    margin-top: var(--space-8);
+  }
+
+  .service-intro h2 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, var(--color-text), var(--color-primary-300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .service-intro p {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .service-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .service-features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .service-features h3 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+
+  .service-features p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .service-cta {
+    margin-top: var(--space-16);
+    text-align: center;
+  }
+</style>

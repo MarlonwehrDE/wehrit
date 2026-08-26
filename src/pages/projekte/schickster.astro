@@ -1,0 +1,121 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import GlassCard from '../../components/ui/GlassCard.astro';
+import GlassButton from '../../components/ui/GlassButton.astro';
+---
+
+<PageLayout
+  title="Schickster"
+  headline="Schickster"
+  subtitle="Luxuriöse Ferienwohnungen in Österreich — Digital erlebbar gemacht."
+>
+  <div class="project-content">
+    <div class="project-logo-area" data-reveal>
+      <img src="/images/projekte/schickster/LogoNurBergGold.png" alt="Schickster Logo" class="project-logo" />
+    </div>
+
+    <div class="project-intro" data-reveal>
+      <GlassCard level="medium" interactive>
+        <h2>Das Projekt</h2>
+        <p>
+          Schickster bietet luxuriöse Ferienwohnungen in Österreich. Ich habe die komplette digitale Präsenz aufgebaut — von der responsiven Website bis zum interaktiven Lobby-Display, das Gästen die Wartezeit am Aufzug verschönert.
+        </p>
+      </GlassCard>
+    </div>
+
+    <div class="project-features" data-reveal data-reveal-stagger>
+      {[
+        { title: 'Responsive Website', desc: 'Komplettes Design & Entwicklung der Haupt-Website. Moderner Look, blitzschnelle Ladezeiten, optimiert für alle Geräte.' },
+        { title: 'Lobby-Display', desc: 'Interaktives Entertainment-System auf einem iiyama-Touchscreen im Eingangsbereich für die Gäste.' },
+        { title: 'Gästeerlebnis', desc: 'Die Wartezeit am Aufzug wird zum Erlebnis — mit interaktiven Inhalten und Informationen zur Region.' },
+        { title: 'Moderner Stack', desc: 'Gebaut mit Astro und GSAP für maximale Performance. Keine Abhängigkeit von schweren Frameworks.' },
+      ].map((f) => (
+        <GlassCard level="thin" interactive tilt data-reveal>
+          <h3>{f.title}</h3>
+          <p>{f.desc}</p>
+        </GlassCard>
+      ))}
+    </div>
+
+    <div class="project-cta" data-reveal>
+      <GlassButton href="https://schickster.at" variant="primary" target="_blank" rel="noopener noreferrer">schickster.at besuchen</GlassButton>
+      <GlassButton href="/kontakt">Ähnliches Projekt anfragen</GlassButton>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .project-content {
+    margin-top: var(--space-8);
+  }
+
+  .project-logo-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .project-logo {
+    max-width: 200px;
+    height: auto;
+    filter: drop-shadow(0 4px 20px rgba(225, 208, 179, 0.3));
+  }
+
+  .project-intro h2 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, var(--color-text), var(--accent-gradient-end, #E1D0B3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) .project-intro h2 {
+      --accent-gradient-end: #a08050;
+    }
+  }
+
+  :global([data-theme="light"]) .project-intro h2 {
+    --accent-gradient-end: #a08050;
+  }
+
+  .project-intro p {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .project-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .project-features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .project-features h3 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+
+  .project-features p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .project-cta {
+    margin-top: var(--space-16);
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+</style>

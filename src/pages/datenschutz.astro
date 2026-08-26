@@ -1,0 +1,255 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import GlassCard from '../components/ui/GlassCard.astro';
+import { contact } from '../config/contact';
+---
+
+<PageLayout
+  title="Datenschutz"
+  headline="Datenschutzerkl&auml;rung"
+>
+  <div class="legal-content" data-reveal>
+    <GlassCard level="thin">
+      <div class="legal-text">
+
+        <h2>1. Datenschutz auf einen Blick</h2>
+        <h3>Allgemeine Hinweise</h3>
+        <p>
+          Die folgenden Hinweise geben einen einfachen &Uuml;berblick dar&uuml;ber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie pers&ouml;nlich identifiziert werden k&ouml;nnen. Ausf&uuml;hrliche Informationen zum Thema Datenschutz entnehmen Sie dieser Datenschutzerkl&auml;rung.
+        </p>
+
+        <h3>Datenerfassung auf dieser Website</h3>
+        <p>
+          <strong>Wer ist verantwortlich f&uuml;r die Datenerfassung auf dieser Website?</strong><br />
+          Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten k&ouml;nnen Sie dem Abschnitt &bdquo;Verantwortliche Stelle&ldquo; in dieser Datenschutzerkl&auml;rung entnehmen.
+        </p>
+        <p>
+          <strong>Wie erfassen wir Ihre Daten?</strong><br />
+          Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen, z.&nbsp;B. durch Eingabe in ein Kontaktformular oder per E-Mail. Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.&nbsp;B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).
+        </p>
+        <p>
+          <strong>Wof&uuml;r nutzen wir Ihre Daten?</strong><br />
+          Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gew&auml;hrleisten. Andere Daten k&ouml;nnen zur Analyse Ihres Nutzerverhaltens verwendet werden &mdash; dies geschieht jedoch nur mit Ihrer ausdr&uuml;cklichen Einwilligung.
+        </p>
+        <p>
+          <strong>Welche Rechte haben Sie bez&uuml;glich Ihrer Daten?</strong><br />
+          Sie haben jederzeit das Recht, unentgeltlich Auskunft &uuml;ber Herkunft, Empf&auml;nger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben au&szlig;erdem ein Recht, die Berichtigung oder L&ouml;schung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, k&ouml;nnen Sie diese Einwilligung jederzeit f&uuml;r die Zukunft widerrufen. Au&szlig;erdem haben Sie das Recht, unter bestimmten Umst&auml;nden die Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zust&auml;ndigen Aufsichtsbeh&ouml;rde zu.
+        </p>
+
+        <h2>2. Hosting</h2>
+        <p>
+          Diese Website wird auf einem externen Server (VPS) gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v.&nbsp;a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die &uuml;ber eine Website generiert werden, handeln.
+        </p>
+        <p>
+          Die Nutzung des Servers erfolgt im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots (Art. 6 Abs. 1 lit. f DSGVO). Der Hoster wird Ihre Daten nur insoweit verarbeiten, wie dies zur Erf&uuml;llung seiner Leistungspflichten erforderlich ist.
+        </p>
+
+        <h2>3. Verantwortliche Stelle</h2>
+        <p>
+          Verantwortlich f&uuml;r die Datenverarbeitung auf dieser Website ist:
+        </p>
+        <p>
+          {contact.name}<br />
+          {contact.company}<br />
+          {contact.street}<br />
+          {contact.zip} {contact.city}<br /><br />
+          Telefon: <a href={`tel:${contact.phoneRaw}`}>{contact.phone}</a><br />
+          E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </p>
+        <p>
+          Verantwortliche Stelle ist die nat&uuml;rliche oder juristische Person, die allein oder gemeinsam mit anderen &uuml;ber die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.&nbsp;B. Namen, E-Mail-Adressen o.&nbsp;&Auml;.) entscheidet.
+        </p>
+
+        <h2>4. Allgemeine Hinweise und Pflichtinformationen</h2>
+
+        <h3>Datenschutz</h3>
+        <p>
+          Ich nehme den Schutz Ihrer pers&ouml;nlichen Daten sehr ernst. Ich behandle Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerkl&auml;rung.
+        </p>
+        <p>
+          Ich weise darauf hin, dass die Daten&uuml;bertragung im Internet (z.&nbsp;B. bei der Kommunikation per E-Mail) Sicherheitsl&uuml;cken aufweisen kann. Ein l&uuml;ckenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht m&ouml;glich.
+        </p>
+
+        <h3>Speicherdauer</h3>
+        <p>
+          Soweit innerhalb dieser Datenschutzerkl&auml;rung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei mir, bis der Zweck f&uuml;r die Datenverarbeitung entf&auml;llt. Wenn Sie ein berechtigtes L&ouml;schersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gel&ouml;scht, sofern ich keine anderen rechtlich zul&auml;ssigen Gr&uuml;nde f&uuml;r die Speicherung Ihrer personenbezogenen Daten habe (z.&nbsp;B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die L&ouml;schung nach Fortfall dieser Gr&uuml;nde.
+        </p>
+
+        <h3>Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung</h3>
+        <p>
+          Sofern Sie in die Datenverarbeitung eingewilligt haben, verarbeite ich Ihre personenbezogenen Daten auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO bzw. Art. 9 Abs. 2 lit. a DSGVO, sofern besondere Datenkategorien nach Art. 9 Abs. 1 DSGVO verarbeitet werden. Im Falle einer ausdr&uuml;cklichen Einwilligung in die &Uuml;bertragung personenbezogener Daten in Drittstaaten erfolgt die Datenverarbeitung au&szlig;erdem auf Grundlage von Art. 49 Abs. 1 lit. a DSGVO. Sofern die Datenverarbeitung zur Vertragserf&uuml;llung oder zur Durchf&uuml;hrung vorvertraglicher Ma&szlig;nahmen erforderlich ist, verarbeite ich Ihre Daten auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO. Ferner verarbeite ich Ihre Daten, sofern diese zur Erf&uuml;llung einer rechtlichen Verpflichtung erforderlich sind, auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO. Die Datenverarbeitung kann ferner auf Grundlage meines berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO erfolgen.
+        </p>
+
+        <h3>Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
+        <p>
+          Viele Datenverarbeitungsvorg&auml;nge sind nur mit Ihrer ausdr&uuml;cklichen Einwilligung m&ouml;glich. Sie k&ouml;nnen eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtm&auml;&szlig;igkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unber&uuml;hrt.
+        </p>
+
+        <h3>Widerspruchsrecht gegen die Datenerhebung in besonderen F&auml;llen (Art. 21 DSGVO)</h3>
+        <p>
+          <strong>Wenn die Datenverarbeitung auf Grundlage von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, haben Sie jederzeit das Recht, aus Gr&uuml;nden, die sich aus Ihrer besonderen Situation ergeben, gegen die Verarbeitung Ihrer personenbezogenen Daten Widerspruch einzulegen. Ich verarbeite die betroffenen personenbezogenen Daten dann nicht mehr, es sei denn, ich kann zwingende schutzw&uuml;rdige Gr&uuml;nde f&uuml;r die Verarbeitung nachweisen, die Ihre Interessen, Rechte und Freiheiten &uuml;berwiegen oder die Verarbeitung dient der Geltendmachung, Aus&uuml;bung oder Verteidigung von Rechtsanspr&uuml;chen.</strong>
+        </p>
+
+        <h3>Beschwerderecht bei der zust&auml;ndigen Aufsichtsbeh&ouml;rde</h3>
+        <p>
+          Im Falle von Verst&ouml;&szlig;en gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbeh&ouml;rde zu, insbesondere in dem Mitgliedstaat ihres gew&ouml;hnlichen Aufenthalts, ihres Arbeitsplatzes oder des Orts des mutma&szlig;lichen Versto&szlig;es. Das Beschwerderecht besteht unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe.
+        </p>
+        <p>
+          Zust&auml;ndige Aufsichtsbeh&ouml;rde:<br />
+          Bayerisches Landesamt f&uuml;r Datenschutzaufsicht (BayLDA)<br />
+          Promenade 18<br />
+          91522 Ansbach<br />
+          <a href="https://www.lda.bayern.de" target="_blank" rel="noopener noreferrer">www.lda.bayern.de</a>
+        </p>
+
+        <h3>Recht auf Daten&uuml;bertragbarkeit</h3>
+        <p>
+          Sie haben das Recht, Daten, die ich auf Grundlage Ihrer Einwilligung oder in Erf&uuml;llung eines Vertrags automatisiert verarbeite, an sich oder an einen Dritten in einem g&auml;ngigen, maschinenlesbaren Format aush&auml;ndigen zu lassen. Sofern Sie die direkte &Uuml;bertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist.
+        </p>
+
+        <h3>Auskunft, Berichtigung und L&ouml;schung</h3>
+        <p>
+          Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft &uuml;ber Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empf&auml;nger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung oder L&ouml;schung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten k&ouml;nnen Sie sich jederzeit an mich wenden.
+        </p>
+
+        <h3>Recht auf Einschr&auml;nkung der Verarbeitung</h3>
+        <p>
+          Sie haben das Recht, die Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Hierzu k&ouml;nnen Sie sich jederzeit an mich wenden. Das Recht auf Einschr&auml;nkung der Verarbeitung besteht in folgenden F&auml;llen:
+        </p>
+        <ul>
+          <li>Wenn Sie die Richtigkeit Ihrer bei mir gespeicherten personenbezogenen Daten bestreiten, ben&ouml;tige ich in der Regel Zeit, um dies zu &uuml;berpr&uuml;fen. F&uuml;r die Dauer der Pr&uuml;fung haben Sie das Recht, die Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</li>
+          <li>Wenn die Verarbeitung Ihrer personenbezogenen Daten unrechtm&auml;&szlig;ig geschah/geschieht, k&ouml;nnen Sie statt der L&ouml;schung die Einschr&auml;nkung der Datenverarbeitung verlangen.</li>
+          <li>Wenn ich Ihre personenbezogenen Daten nicht mehr ben&ouml;tige, Sie sie jedoch zur Aus&uuml;bung, Verteidigung oder Geltendmachung von Rechtsanspr&uuml;chen ben&ouml;tigen, haben Sie das Recht, statt der L&ouml;schung die Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</li>
+          <li>Wenn Sie einen Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben, muss eine Abw&auml;gung zwischen Ihren und meinen Interessen vorgenommen werden. Solange noch nicht feststeht, wessen Interessen &uuml;berwiegen, haben Sie das Recht, die Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</li>
+        </ul>
+        <p>
+          Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten eingeschr&auml;nkt haben, d&uuml;rfen diese Daten &mdash; von ihrer Speicherung abgesehen &mdash; nur mit Ihrer Einwilligung oder zur Geltendmachung, Aus&uuml;bung oder Verteidigung von Rechtsanspr&uuml;chen oder zum Schutz der Rechte einer anderen nat&uuml;rlichen oder juristischen Person oder aus Gr&uuml;nden eines wichtigen &ouml;ffentlichen Interesses der Europ&auml;ischen Union oder eines Mitgliedstaats verarbeitet werden.
+        </p>
+
+        <h2>5. Datenerfassung auf dieser Website</h2>
+
+        <h3>Server-Log-Dateien</h3>
+        <p>
+          Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an den Server &uuml;bermittelt. Dies sind:
+        </p>
+        <ul>
+          <li>Browsertyp und Browserversion</li>
+          <li>Verwendetes Betriebssystem</li>
+          <li>Referrer URL</li>
+          <li>Hostname des zugreifenden Rechners</li>
+          <li>Uhrzeit der Serveranfrage</li>
+          <li>IP-Adresse</li>
+        </ul>
+        <p>
+          Eine Zusammenf&uuml;hrung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website &mdash; hierzu m&uuml;ssen die Server-Log-Dateien erfasst werden.
+        </p>
+
+        <h3>Kontaktformular</h3>
+        <p>
+          Wenn Sie mir per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und f&uuml;r den Fall von Anschlussfragen bei mir gespeichert. Diese Daten gebe ich nicht ohne Ihre Einwilligung weiter.
+        </p>
+        <p>
+          Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erf&uuml;llung eines Vertrags zusammenh&auml;ngt oder zur Durchf&uuml;hrung vorvertraglicher Ma&szlig;nahmen erforderlich ist. In allen &uuml;brigen F&auml;llen beruht die Verarbeitung auf meinem berechtigten Interesse an der effektiven Bearbeitung der an mich gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), sofern diese abgefragt wurde.
+        </p>
+        <p>
+          Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei mir, bis Sie mich zur L&ouml;schung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck f&uuml;r die Datenspeicherung entf&auml;llt (z.&nbsp;B. nach abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen &mdash; insbesondere Aufbewahrungsfristen &mdash; bleiben unber&uuml;hrt.
+        </p>
+
+        <h3>Anfrage per E-Mail oder Telefon</h3>
+        <p>
+          Wenn Sie mich per E-Mail oder Telefon kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei mir gespeichert und verarbeitet. Diese Daten gebe ich nicht ohne Ihre Einwilligung weiter.
+        </p>
+        <p>
+          Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erf&uuml;llung eines Vertrags zusammenh&auml;ngt oder zur Durchf&uuml;hrung vorvertraglicher Ma&szlig;nahmen erforderlich ist. In allen &uuml;brigen F&auml;llen beruht die Verarbeitung auf meinem berechtigten Interesse an der effektiven Bearbeitung der an mich gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), sofern diese abgefragt wurde.
+        </p>
+
+        <h2>6. Lokale Speicherung (localStorage)</h2>
+        <p>
+          Diese Website verwendet die localStorage-Technologie Ihres Browsers, um Ihre gew&auml;hlte Farbdesign-Einstellung (Dark Mode / Light Mode) sowie Ihre Einwilligungsentscheidung im Cookie-Consent-Banner zu speichern. Es handelt sich hierbei um rein technisch notwendige Speicherungen, die keine personenbezogenen Daten enthalten und nicht zu Tracking- oder Analysezwecken verwendet werden. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer benutzerfreundlichen Website-Darstellung).
+        </p>
+
+        <h3>Einwilligungsverwaltung (Consent-Banner)</h3>
+        <p>
+          Beim ersten Besuch dieser Website wird Ihnen ein Consent-Banner angezeigt, &uuml;ber das Sie Ihre Einwilligung f&uuml;r optionale Dienste erteilen oder verweigern k&ouml;nnen. Ihre Auswahl wird im localStorage Ihres Browsers gespeichert und bei sp&auml;teren Besuchen ber&uuml;cksichtigt. Sie k&ouml;nnen Ihre Einstellungen jederzeit &uuml;ber das Zahnrad-Symbol unten links auf der Website &auml;ndern. Optionale Dienste werden erst nach Ihrer ausdr&uuml;cklichen Einwilligung aktiviert (Art. 6 Abs. 1 lit. a DSGVO).
+        </p>
+
+        <h2>7. Ihre Rechte im &Uuml;berblick</h2>
+        <p>Sie haben gegen&uuml;ber mir folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:</p>
+        <ul>
+          <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
+          <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
+          <li>Recht auf L&ouml;schung (Art. 17 DSGVO)</li>
+          <li>Recht auf Einschr&auml;nkung der Verarbeitung (Art. 18 DSGVO)</li>
+          <li>Recht auf Daten&uuml;bertragbarkeit (Art. 20 DSGVO)</li>
+          <li>Recht auf Widerspruch (Art. 21 DSGVO)</li>
+        </ul>
+        <p>
+          Zur Aus&uuml;bung Ihrer Rechte wenden Sie sich bitte an:<br />
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </p>
+
+      </div>
+    </GlassCard>
+  </div>
+</PageLayout>
+
+<style>
+  .legal-content {
+    margin-top: var(--space-8);
+  }
+
+  .legal-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .legal-text h2 {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: var(--space-6);
+  }
+
+  .legal-text h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-2);
+  }
+
+  .legal-text p {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .legal-text ul {
+    list-style: disc;
+    padding-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .legal-text li {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .legal-text a {
+    color: var(--color-primary-400);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal-text a:hover {
+    color: var(--color-primary-300);
+  }
+
+  .legal-text strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+</style>

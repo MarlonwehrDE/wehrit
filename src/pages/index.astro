@@ -1,7 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import GradientMesh from '../components/fx/GradientMesh.astro';
 import Hero from '../components/Hero.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import ProjectsShowcase from '../components/ProjectsShowcase.astro';
+import StatsGrid from '../components/StatsGrid.astro';
+import ContactCTA from '../components/ContactCTA.astro';
 ---
-<BaseLayout title="WehrIT – Webdevelopment, Softwareentwicklung, E-Rechnung">
+<BaseLayout title="WehrIT - Webdesign, Softwareentwicklung, E-Rechnung">
+  <GradientMesh />
   <Hero />
+  <ServicesGrid />
+  <ProjectsShowcase />
+  <StatsGrid />
+  <ContactCTA />
 </BaseLayout>

@@ -1,0 +1,137 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import GlassCard from '../components/ui/GlassCard.astro';
+
+const projects = [
+  {
+    name: 'Schickster',
+    type: 'Luxuriöse Ferienwohnungen',
+    desc: 'Komplette Website, interaktives Lobby-Display und Gäste-Entertainment für ein Premium-Ferienwohnungsprojekt in Österreich.',
+    href: '/projekte/schickster',
+    image: '/images/projekte/schickster/LogoNurBergGold.png',
+    tag: 'Webdesign',
+    accent: '#E1D0B3',
+  },
+  {
+    name: 'ULGlass',
+    type: 'Glasindustrie · Ofenbau',
+    desc: 'Von der Homepage bis zur kompletten Büroautomatisierung — Rechnungen, Inventur, Gehalt und Cloud-Anbindung.',
+    href: '/projekte/ulglass',
+    image: '/images/projekte/ulglass/LogoUlglass.png',
+    tag: 'Software',
+    accent: '#04609F',
+  },
+];
+---
+
+<PageLayout
+  title="Projekte"
+  headline="Ausgewählte Projekte."
+  subtitle="Ein Blick auf bisherige Arbeiten und aktuelle Projekte."
+>
+  <div class="projects-grid" data-reveal data-reveal-stagger>
+    {projects.map((p) => (
+      <div class="project-card-wrap" data-project-href={p.href} data-reveal>
+        <GlassCard level="thick" interactive tilt>
+          <div class="project-card-inner" style={`--p-accent: ${p.accent}`}>
+            <div class="project-thumb">
+              <img src={p.image} alt={p.name} loading="lazy" />
+            </div>
+            <span class="project-tag">{p.tag}</span>
+            <h3>{p.name}</h3>
+            <p class="project-type">{p.type}</p>
+            <p class="project-desc">{p.desc}</p>
+            <span class="project-more">Details ansehen &rarr;</span>
+          </div>
+        </GlassCard>
+      </div>
+    ))}
+  </div>
+</PageLayout>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .project-card-wrap {
+    cursor: pointer;
+  }
+
+  .project-thumb {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-6) 0;
+    margin-bottom: var(--space-4);
+  }
+
+  .project-thumb img {
+    max-height: 80px;
+    width: auto;
+    filter: drop-shadow(0 4px 16px color-mix(in srgb, var(--p-accent) 40%, transparent));
+  }
+
+  .project-tag {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-primary-400);
+    margin-bottom: var(--space-4);
+  }
+
+  .project-card-inner h3 {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-1);
+  }
+
+  .project-type {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .project-desc {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--space-4);
+  }
+
+  .project-more {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--p-accent);
+    transition: gap var(--duration-fast) var(--ease-out);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) .project-more {
+      color: color-mix(in srgb, var(--p-accent) 70%, #1e1b3a);
+    }
+  }
+
+  :global([data-theme="light"]) .project-more {
+    color: color-mix(in srgb, var(--p-accent) 70%, #1e1b3a);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-project-href]').forEach((card) => {
+    card.addEventListener('click', () => {
+      const href = card.dataset.projectHref;
+      if (href) window.location.href = href;
+    });
+  });
+</script>

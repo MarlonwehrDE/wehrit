@@ -1,0 +1,64 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import GradientMesh from '../components/fx/GradientMesh.astro';
+import LiquidBlob from '../components/fx/LiquidBlob.astro';
+
+interface Props {
+  title: string;
+  headline: string;
+  description?: string;
+  subtitle?: string;
+}
+
+const { title, headline, description, subtitle } = Astro.props;
+---
+
+<BaseLayout title={`${title} - WehrIT`} description={description}>
+  <GradientMesh />
+
+  <section class="page-hero">
+    <LiquidBlob color="var(--color-primary-400)" size="500px" top="-20%" left="-10%" opacity="0.35" speed={0.9} />
+    <div class="container page-hero-content" data-reveal>
+      <h1 class="page-title">{headline}</h1>
+      {subtitle && <p class="page-subtitle">{subtitle}</p>}
+    </div>
+  </section>
+
+  <div class="page-body container">
+    <slot />
+  </div>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: var(--space-32) 0 var(--space-16);
+    overflow: visible;
+  }
+
+  .page-hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-title {
+    font-size: var(--text-3xl);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--color-text), var(--color-primary-300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .page-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-4);
+    max-width: 600px;
+  }
+
+  .page-body {
+    position: relative;
+    padding-bottom: var(--space-24);
+  }
+</style>

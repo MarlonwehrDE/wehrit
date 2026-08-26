@@ -1,0 +1,91 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import GlassCard from '../components/ui/GlassCard.astro';
+import GlassButton from '../components/ui/GlassButton.astro';
+---
+
+<PageLayout
+  title="E-Rechnung"
+  headline="E-Rechnung ohne Kopfschmerzen."
+  subtitle="Rechtssichere Umstellung auf elektronische Rechnungen — ich begleite euch durch den gesamten Prozess."
+>
+  <div class="service-content">
+    <div class="service-intro" data-reveal>
+      <GlassCard level="medium" interactive>
+        <h2>Was ändert sich?</h2>
+        <p>
+          Ab 2025 wird die E-Rechnung im B2B-Bereich schrittweise Pflicht. Das bedeutet: strukturierte, maschinenlesbare Rechnungsformate wie ZUGFeRD oder XRechnung statt PDF. Klingt kompliziert? Muss es nicht sein. Ich helfe euch bei der Umstellung — von der Analyse eurer aktuellen Prozesse bis zur Implementierung.
+        </p>
+      </GlassCard>
+    </div>
+
+    <div class="service-features" data-reveal data-reveal-stagger>
+      {[
+        { title: 'Ist-Analyse', desc: 'Wo steht ihr aktuell? Welche Systeme nutzt ihr? Was muss sich ändern?' },
+        { title: 'Format-Beratung', desc: 'ZUGFeRD, XRechnung oder Peppol — welches Format passt zu euch?' },
+        { title: 'Implementierung', desc: 'Technische Umsetzung und Integration in eure bestehenden Systeme.' },
+        { title: 'Schulung', desc: 'Eure Mitarbeiter fit machen für den neuen Prozess.' },
+      ].map((f) => (
+        <GlassCard level="thin" interactive tilt data-reveal>
+          <h3>{f.title}</h3>
+          <p>{f.desc}</p>
+        </GlassCard>
+      ))}
+    </div>
+
+    <div class="service-cta" data-reveal>
+      <GlassButton href="/kontakt" variant="primary">Beratung anfragen</GlassButton>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .service-content {
+    margin-top: var(--space-8);
+  }
+
+  .service-intro h2 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, var(--color-text), var(--color-primary-300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .service-intro p {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .service-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .service-features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .service-features h3 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+
+  .service-features p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .service-cta {
+    margin-top: var(--space-16);
+    text-align: center;
+  }
+</style>

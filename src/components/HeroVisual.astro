@@ -1,0 +1,113 @@
+---
+---
+
+<div class="hero-visual" aria-hidden="true">
+  <div class="hv-glow"></div>
+  <div class="hv-mark-wrap">
+    <svg class="hv-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1774 560" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(0.000000,887.000000) scale(0.100000,-0.100000)">
+        <path class="mark-m" d="M10029 7962 c-166 -149 -534 -476 -899 -801 -90 -80 -237 -211 -325 -291 -89 -80 -264 -237 -390 -350 -126 -113 -322 -288 -435 -389 -309 -277 -903 -811 -1081 -973 l-86 -78 -114 143 c-62 78 -143 180 -180 227 -37 47 -192 243 -346 436 -262 331 -338 428 -715 904 -295 374 -529 665 -536 667 -4 1 -59 -82 -122 -184 -63 -103 -131 -212 -151 -242 -41 -63 -133 -209 -364 -576 -243 -386 -785 -1230 -1140 -1775 -62 -96 -171 -264 -242 -373 -146 -224 -377 -579 -633 -969 -96 -147 -209 -321 -251 -385 -42 -65 -107 -165 -144 -223 -81 -125 -165 -260 -165 -266 0 -2 280 -3 621 -2 l622 3 151 215 c250 354 534 760 651 930 61 88 164 238 229 332 194 281 813 1189 934 1371 62 92 116 167 121 167 5 0 110 -120 233 -267 216 -259 395 -471 638 -753 64 -74 212 -247 330 -385 412 -482 430 -502 438 -489 4 6 52 48 107 94 120 103 355 304 814 699 189 163 368 316 397 341 173 147 1054 914 1234 1073 131 116 796 697 912 796 l77 66 1 733 c0 402 -3 732 -7 731 -5 0 -87 -71 -184 -157z"/>
+        <path class="mark-w" d="M15172 7503 c-376 -544 -497 -716 -772 -1098 -315 -437 -351 -486 -495 -681 -66 -89 -174 -236 -240 -325 -66 -90 -185 -251 -265 -359 -80 -107 -159 -214 -175 -237 -17 -23 -115 -157 -220 -298 l-190 -256 -28 35 c-15 19 -83 111 -150 205 -209 290 -470 648 -642 879 l-99 133 -632 -632 -631 -631 -46 108 c-25 60 -75 181 -110 269 -36 88 -105 255 -152 370 -124 300 -258 628 -355 865 -45 113 -84 207 -86 209 -1 2 -49 -37 -105 -85 -57 -49 -155 -134 -219 -188 -63 -55 -225 -196 -360 -315 -135 -118 -247 -216 -249 -218 -4 -3 14 -45 99 -233 227 -503 384 -847 447 -985 36 -77 96 -207 133 -290 37 -82 87 -190 110 -240 73 -156 259 -562 355 -776 85 -190 113 -248 121 -258 1 -2 334 329 738 734 404 405 739 735 744 734 5 -2 142 -182 304 -399 162 -217 403 -540 535 -718 l241 -323 68 88 c38 49 114 147 169 218 93 119 191 248 630 824 690 906 1081 1424 1351 1786 686 925 674 909 1031 1400 152 209 293 403 313 430 20 28 90 127 155 220 65 94 127 182 137 198 l19 27 -675 0 -674 0 -130 -187z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hv-grain"></div>
+</div>
+
+<style>
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+
+  .hv-glow {
+    position: absolute;
+    inset: 5%;
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(124, 110, 224, 0.3) 0%,
+      rgba(110, 231, 200, 0.14) 40%,
+      transparent 70%
+    );
+    filter: blur(40px);
+    animation: hv-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes hv-pulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
+
+  .hv-mark-wrap {
+    position: absolute;
+    inset: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: hv-float 8s ease-in-out infinite;
+  }
+
+  .hv-mark {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .mark-m {
+    fill: rgba(255, 255, 255, 0.9);
+    opacity: 0.15;
+  }
+
+  .mark-w {
+    fill: var(--color-primary-400);
+    opacity: 0.4;
+  }
+
+  .hv-mark {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .hv-grain {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  @keyframes hv-float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(4px, -8px) rotate(2deg); }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) .mark-m {
+      fill: rgba(0, 0, 0, 0.8);
+      opacity: 0.2;
+    }
+    :root:not([data-theme]) .mark-w {
+      opacity: 0.35;
+    }
+  }
+
+  :global([data-theme="light"]) .mark-m {
+    fill: rgba(0, 0, 0, 0.8);
+    opacity: 0.2;
+  }
+
+  :global([data-theme="light"]) .mark-w {
+    opacity: 0.35;
+  }
+
+  @media (max-width: 768px) {
+    .hero-visual {
+      max-width: 260px;
+    }
+  }
+</style>

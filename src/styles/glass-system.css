@@ -1,0 +1,398 @@
+/* ===========================
+   GLASS EFFECT SYSTEM
+   Apple Liquid Glass inspired
+   =========================== */
+
+/* ---- Glass Material Levels ---- */
+
+.glass-thin,
+.glass-medium,
+.glass-thick,
+.glass-ultra {
+  position: relative;
+  border-radius: var(--radius-lg);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Gradient border via background-clip (works with border-radius) */
+.glass-thin,
+.glass-medium,
+.glass-thick,
+.glass-ultra {
+  border: none;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.glass-thin {
+  padding: 1px;
+  background-image:
+    linear-gradient(var(--glass-bg-thin), var(--glass-bg-thin)),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+  backdrop-filter: blur(var(--glass-blur-thin));
+  -webkit-backdrop-filter: blur(var(--glass-blur-thin));
+  box-shadow:
+    0 2px 20px 0 var(--glass-shadow-ambient),
+    0 6px 20px -6px var(--glass-shadow-cast),
+    0 2px 12px -2px var(--glass-shadow-colored);
+}
+
+.glass-medium {
+  padding: 1px;
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--glass-bg-medium), var(--glass-refraction) 15%),
+      var(--glass-bg-medium)
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.10) 50%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+  backdrop-filter: blur(var(--glass-blur-medium));
+  -webkit-backdrop-filter: blur(var(--glass-blur-medium));
+  box-shadow:
+    0 2px 32px 0 var(--glass-shadow-ambient),
+    0 8px 28px -8px var(--glass-shadow-cast),
+    0 3px 16px -3px var(--glass-shadow-colored),
+    inset 0 0 30px 0 rgba(124, 110, 224, 0.05);
+}
+
+.glass-thick {
+  padding: 1px;
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--glass-bg-thick), var(--glass-refraction) 20%),
+      var(--glass-bg-thick)
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.12) 45%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+  backdrop-filter: blur(var(--glass-blur-thick));
+  -webkit-backdrop-filter: blur(var(--glass-blur-thick));
+  box-shadow:
+    0 2px 40px 0 var(--glass-shadow-ambient),
+    0 12px 32px -8px var(--glass-shadow-cast),
+    0 4px 24px -4px var(--glass-shadow-colored),
+    inset 0 0 50px 0 rgba(124, 110, 224, 0.08);
+}
+
+.glass-ultra {
+  padding: 1px;
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--glass-bg-ultra), var(--glass-refraction) 25%),
+      var(--glass-bg-ultra)
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.40) 0%,
+      rgba(255, 255, 255, 0.14) 40%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+  backdrop-filter: blur(var(--glass-blur-ultra));
+  -webkit-backdrop-filter: blur(var(--glass-blur-ultra));
+  box-shadow:
+    0 2px 48px 0 var(--glass-shadow-ambient),
+    0 16px 40px -10px var(--glass-shadow-cast),
+    0 6px 32px -4px var(--glass-shadow-colored),
+    inset 0 0 60px 0 rgba(124, 110, 224, 0.10);
+}
+
+/* ---- Grain Texture Overlay ---- */
+
+.glass-thin::before,
+.glass-medium::before,
+.glass-thick::before,
+.glass-ultra::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: var(--glass-grain-opacity);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
+  border-radius: inherit;
+}
+
+/* ---- Full-Surface Caustic Refraction ---- */
+
+.glass-thin { --refraction-opacity: 0.03; }
+.glass-medium { --refraction-opacity: 0.05; }
+.glass-thick { --refraction-opacity: 0.07; }
+.glass-ultra { --refraction-opacity: 0.10; }
+
+.glass-thin::after,
+.glass-medium::after,
+.glass-thick::after,
+.glass-ultra::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    conic-gradient(
+      from var(--iris-angle, 0deg) at 30% 40%,
+      transparent 0deg,
+      rgba(255, 180, 180, var(--refraction-opacity)) 45deg,
+      transparent 90deg,
+      rgba(180, 255, 220, var(--refraction-opacity)) 135deg,
+      transparent 180deg,
+      rgba(180, 200, 255, var(--refraction-opacity)) 225deg,
+      transparent 270deg,
+      rgba(220, 180, 255, var(--refraction-opacity)) 315deg,
+      transparent 360deg
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 60% 50%,
+      rgba(255, 255, 255, calc(var(--refraction-opacity) * 0.5)),
+      transparent 70%
+    );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.glass-interactive:hover {
+  --refraction-opacity: 0.08;
+}
+
+
+/* ---- Specular Highlight Layer ---- */
+
+.glass-specular {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.glass-specular::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--specular-x, 50%);
+  transform: translateX(-50%);
+  width: var(--glass-specular-width);
+  height: var(--glass-specular-height);
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 0%,
+    var(--glass-specular-color),
+    transparent
+  );
+  filter: blur(var(--glass-specular-blur));
+  will-change: transform, opacity;
+  transition:
+    left var(--duration-slow) var(--ease-glass),
+    opacity var(--duration-slow) var(--ease-glass);
+}
+
+.glass-thin .glass-specular  { --glass-specular-height: 24px; --glass-specular-blur: 12px; }
+.glass-medium .glass-specular { --glass-specular-height: 36px; --glass-specular-blur: 18px; }
+.glass-thick .glass-specular  { --glass-specular-height: 48px; --glass-specular-blur: 22px; }
+.glass-ultra .glass-specular  { --glass-specular-height: 60px; --glass-specular-blur: 28px; }
+
+/* ---- Fresnel Edge Brightening ---- */
+
+.glass-fresnel {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow:
+    inset 0 0 var(--glass-fresnel-blur) var(--glass-fresnel-width) var(--glass-fresnel-color);
+  opacity: var(--glass-fresnel-opacity);
+  mix-blend-mode: screen;
+  transition: opacity var(--duration-slow) var(--ease-glass);
+}
+
+.glass-interactive:hover .glass-fresnel {
+  opacity: calc(var(--glass-fresnel-opacity) * 1.5);
+}
+
+/* ---- Inner Layers Container ---- */
+
+.glass-inner-layers {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+/* ---- Iridescent Border ---- */
+
+.glass-iridescent {
+  padding: 1px;
+  background-image:
+    linear-gradient(var(--color-bg), var(--color-bg)),
+    conic-gradient(
+      from var(--iris-angle, 0deg) at var(--x, 50%) var(--y, 50%),
+      var(--color-iris-pink),
+      var(--color-iris-cyan),
+      var(--color-iris-blue),
+      var(--color-iris-violet),
+      var(--color-iris-pink)
+    ) !important;
+  animation: iris-rotate var(--liquid-speed) linear infinite;
+}
+
+.glass-iridescent > * {
+  background: var(--color-bg);
+  border-radius: calc(var(--radius-lg) - 1px);
+}
+
+.glass-iridescent::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--iris-angle, 0deg) at var(--x, 50%) var(--y, 50%),
+    var(--color-iris-pink),
+    var(--color-iris-cyan),
+    var(--color-iris-blue),
+    var(--color-iris-violet),
+    var(--color-iris-pink)
+  );
+  opacity: 0.25;
+  filter: blur(30px);
+  z-index: -1;
+  animation: iris-rotate var(--liquid-speed) linear infinite;
+}
+
+@keyframes iris-rotate {
+  to { --iris-angle: 360deg; }
+}
+
+/* ---- Interactive Cursor Light ---- */
+
+.glass-interactive {
+  --x: 50%;
+  --y: 50%;
+  --light-size: 500px;
+  --light-opacity: 0;
+}
+
+.glass-interactive .glass-light {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      var(--light-size) circle at var(--x) var(--y),
+      var(--glass-highlight),
+      transparent 40%
+    ),
+    radial-gradient(
+      calc(var(--light-size) * 1.4) circle at var(--x) var(--y),
+      rgba(124, 110, 224, 0.06),
+      transparent 50%
+    );
+  opacity: var(--light-opacity);
+  transition: opacity var(--duration-normal) var(--ease-glass);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* ---- 3D Tilt Container ---- */
+
+.glass-tilt-wrap {
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+
+[data-tilt] {
+  will-change: transform;
+}
+
+/* ---- Scroll Reveal ---- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  filter: blur(6px);
+  transition:
+    opacity var(--duration-glacial) var(--ease-out),
+    transform var(--duration-glacial) var(--ease-out),
+    filter var(--duration-glacial) var(--ease-out);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+[data-reveal-stagger] > [data-reveal] {
+  transition-delay: calc(var(--reveal-index, 0) * 100ms);
+}
+
+/* ---- Ripple Effect ---- */
+
+[data-ripple] {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-circle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--glass-highlight);
+  transform: scale(0);
+  animation: ripple-expand 600ms var(--ease-out) forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes ripple-expand {
+  to {
+    transform: scale(40);
+    opacity: 0;
+  }
+}
+
+/* ---- Magnetic Hover ---- */
+
+[data-magnetic] {
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+/* ---- Reduced Motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-specular::before {
+    transition: none;
+  }
+
+  .glass-fresnel {
+    transition: none;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}

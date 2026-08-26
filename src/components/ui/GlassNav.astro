@@ -1,0 +1,568 @@
+---
+interface NavChild {
+  label: string;
+  href: string;
+}
+
+interface NavLink {
+  label: string;
+  href: string;
+  children?: NavChild[];
+}
+
+interface Props {
+  links: NavLink[];
+}
+
+const { links } = Astro.props;
+---
+
+<header class="glass-nav" id="glass-nav">
+  <nav class="glass-nav-inner container">
+    <a href="/" class="nav-logo" data-magnetic="0.08">
+      <span class="logo-text">
+        <span class="logo-wehr">WEHR</span><span class="logo-it">IT</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" id="nav-toggle">
+      <span class="hamburger" />
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      <div class="nav-specular" aria-hidden="true"></div>
+      <div class="nav-fresnel" aria-hidden="true"></div>
+      {links.map((link) => (
+        link.children ? (
+          <li class="nav-dropdown">
+            <button class="nav-link nav-dropdown-trigger" aria-expanded="false">
+              {link.label}
+              <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="nav-dropdown-menu glass-medium">
+              {link.children.map((child) => (
+                <li>
+                  <a href={child.href} class="nav-dropdown-item">{child.label}</a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ) : (
+          <li>
+            <a href={link.href} class="nav-link" data-magnetic="0.05">
+              {link.label}
+            </a>
+          </li>
+        )
+      ))}
+      <li class="nav-cta-wrap">
+        <a class="nav-cta" data-magnetic="0.1" data-ripple data-contact-modal>Kontakt</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .glass-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: var(--space-3) 0;
+    background: transparent;
+    transition:
+      background var(--duration-normal) var(--ease-glass),
+      backdrop-filter var(--duration-normal) var(--ease-glass);
+  }
+
+  .glass-nav.scrolled {
+    background: var(--glass-bg-thick);
+    backdrop-filter: blur(var(--glass-blur-thick));
+    -webkit-backdrop-filter: blur(var(--glass-blur-thick));
+    border-bottom: 1px solid var(--glass-border-subtle);
+  }
+
+  .glass-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: transform var(--duration-fast) var(--ease-spring);
+  }
+
+  .nav-logo:hover {
+    transform: scale(1.04);
+  }
+
+  .logo-text {
+    display: inline-flex;
+    align-items: baseline;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    transition: font-size var(--duration-normal) var(--ease-glass);
+    user-select: none;
+  }
+
+  .glass-nav.scrolled .logo-text {
+    font-size: 1.25rem;
+  }
+
+  .logo-wehr {
+    color: var(--color-text);
+  }
+
+  .logo-it {
+    color: var(--color-primary-400);
+    position: relative;
+    margin-left: 0.2em;
+  }
+
+  .logo-it::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-primary-400);
+    border-radius: 1px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast) var(--ease-glass);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+  }
+
+  /* Dropdown */
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .dropdown-chevron {
+    transition: transform var(--duration-fast) var(--ease-glass);
+  }
+
+  .nav-dropdown-trigger[aria-expanded="true"] .dropdown-chevron {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + var(--space-3));
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+    min-width: 200px;
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--duration-fast) var(--ease-glass),
+      transform var(--duration-fast) var(--ease-glass),
+      visibility 0s linear var(--duration-fast);
+  }
+
+  .nav-dropdown.open .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+    transition:
+      opacity var(--duration-fast) var(--ease-glass),
+      transform var(--duration-fast) var(--ease-glass),
+      visibility 0s linear 0s;
+  }
+
+  .nav-dropdown-item {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition:
+      color var(--duration-fast) var(--ease-glass),
+      background var(--duration-fast) var(--ease-glass);
+  }
+
+  .nav-dropdown-item:hover {
+    color: var(--color-text);
+    background: var(--glass-bg-thin);
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.2rem;
+    background: var(--glass-bg-medium);
+    border: 1px solid var(--glass-border-medium);
+    border-radius: var(--radius-pill);
+    backdrop-filter: blur(var(--glass-blur-thin));
+    -webkit-backdrop-filter: blur(var(--glass-blur-thin));
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-primary-300);
+    text-decoration: none;
+    transition:
+      background var(--duration-fast) var(--ease-glass),
+      border-color var(--duration-fast) var(--ease-glass);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-cta:hover {
+    background: var(--glass-bg-thick);
+    border-color: var(--color-primary-400);
+  }
+
+  /* Hamburger */
+  .nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: transform var(--duration-normal) var(--ease-spring);
+  }
+
+  .hamburger {
+    position: relative;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .hamburger::before { top: -7px; }
+  .hamburger::after { top: 7px; }
+
+  .nav-toggle[aria-expanded="true"] .hamburger {
+    background: transparent;
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  /* Kill containing block when menu is open so fixed children use viewport */
+  .glass-nav.menu-open {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(320px, 85vw);
+      height: 100vh;
+      height: 100dvh;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-6);
+      padding: var(--space-20) var(--space-8) var(--space-8);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124, 110, 224, 0.14) 0%,
+          rgba(124, 110, 224, 0.06) 40%,
+          rgba(100, 80, 200, 0.10) 100%
+        ),
+        var(--glass-bg-ultra);
+      backdrop-filter: blur(var(--glass-blur-ultra)) saturate(1.6);
+      -webkit-backdrop-filter: blur(var(--glass-blur-ultra)) saturate(1.6);
+      border-left: 1px solid rgba(124, 110, 224, 0.25);
+      box-shadow:
+        -4px 0 32px rgba(0, 0, 0, 0.18),
+        inset 1px 0 0 0 rgba(255, 255, 255, 0.10),
+        inset 0 0 80px 0 rgba(124, 110, 224, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      transform: translateX(100%);
+      visibility: hidden;
+      transition: transform 0.35s var(--ease-out), visibility 0s linear 0.35s;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 1001;
+      isolation: isolate;
+    }
+
+    /* Grain texture overlay */
+    .nav-links::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: var(--glass-grain-opacity);
+      pointer-events: none;
+      z-index: 1;
+      mix-blend-mode: overlay;
+    }
+
+    /* Caustic refraction layer */
+    .nav-links::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        conic-gradient(
+          from 120deg at 25% 30%,
+          transparent 0deg,
+          rgba(180, 160, 255, 0.07) 60deg,
+          transparent 120deg,
+          rgba(140, 120, 240, 0.05) 180deg,
+          transparent 240deg,
+          rgba(200, 180, 255, 0.06) 300deg,
+          transparent 360deg
+        ),
+        radial-gradient(
+          ellipse 70% 50% at 70% 30%,
+          rgba(124, 110, 224, 0.08),
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 60% 40% at 30% 70%,
+          rgba(160, 140, 255, 0.06),
+          transparent 60%
+        );
+      mix-blend-mode: overlay;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .nav-links.open {
+      transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.35s var(--ease-out), visibility 0s linear 0s;
+    }
+
+    /* Specular highlight at top edge */
+    .nav-links .nav-specular {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: radial-gradient(
+        ellipse 80% 100% at 50% 0%,
+        rgba(200, 190, 255, 0.12),
+        transparent
+      );
+      filter: blur(16px);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Fresnel edge glow */
+    .nav-links .nav-fresnel {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+        inset -1px 0 0 0 rgba(200, 180, 255, 0.08),
+        inset 0 0 60px 0 rgba(124, 110, 224, 0.04);
+      mix-blend-mode: screen;
+    }
+
+    .nav-link {
+      font-size: var(--text-lg);
+    }
+
+    .nav-dropdown {
+      position: static;
+    }
+
+    .nav-dropdown-menu {
+      position: static;
+      transform: none;
+      min-width: 0;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      box-shadow: none;
+      padding: 0 0 0 var(--space-4);
+      max-height: 0;
+      overflow: hidden;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: max-height 0.3s var(--ease-glass);
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+      transform: none;
+      max-height: 200px;
+    }
+
+    .nav-dropdown-item {
+      font-size: var(--text-base);
+      padding: var(--space-2) var(--space-3);
+    }
+
+    .nav-cta-wrap {
+      margin-top: auto;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById("glass-nav")!;
+  const toggle = document.getElementById("nav-toggle")!;
+  const links = document.getElementById("nav-links")!;
+
+  const backdrop = document.createElement("div");
+  const isLight = () => {
+    const dt = document.documentElement.getAttribute("data-theme");
+    if (dt) return dt === "light";
+    return window.matchMedia("(prefers-color-scheme: light)").matches;
+  };
+  backdrop.style.cssText =
+    "position:fixed;inset:0;z-index:999;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity 0.3s ease";
+  document.body.appendChild(backdrop);
+
+  let scrolled = false;
+  const onScroll = () => {
+    const shouldBeScrolled = window.scrollY > 60;
+    if (shouldBeScrolled !== scrolled) {
+      scrolled = shouldBeScrolled;
+      nav.classList.toggle("scrolled", scrolled);
+    }
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  function openMenu() {
+    nav.classList.add("menu-open");
+    void nav.offsetHeight;
+    toggle.setAttribute("aria-expanded", "true");
+    links.classList.add("open");
+    document.body.style.overflow = "hidden";
+    backdrop.style.background = isLight() ? "rgba(0,0,0,0.15)" : "rgba(0,0,0,0.4)";
+    backdrop.style.opacity = "1";
+    backdrop.style.pointerEvents = "auto";
+  }
+
+  function closeMenu() {
+    toggle.setAttribute("aria-expanded", "false");
+    links.classList.remove("open");
+    document.body.style.overflow = "";
+    backdrop.style.opacity = "0";
+    backdrop.style.pointerEvents = "none";
+    links.addEventListener("transitionend", () => {
+      if (!links.classList.contains("open")) {
+        nav.classList.remove("menu-open");
+      }
+    }, { once: true });
+  }
+
+  toggle.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    if (expanded) closeMenu();
+    else openMenu();
+  });
+
+  backdrop.addEventListener("click", closeMenu);
+
+  links.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", closeMenu);
+  });
+
+  // Dropdown logic
+  document.querySelectorAll(".nav-dropdown-trigger").forEach((trigger) => {
+    const parent = trigger.closest(".nav-dropdown")!;
+
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = parent.classList.contains("open");
+
+      document.querySelectorAll(".nav-dropdown.open").forEach((d) => {
+        d.classList.remove("open");
+        d.querySelector(".nav-dropdown-trigger")?.setAttribute("aria-expanded", "false");
+      });
+
+      if (!isOpen) {
+        parent.classList.add("open");
+        trigger.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".nav-dropdown.open").forEach((d) => {
+      d.classList.remove("open");
+      d.querySelector(".nav-dropdown-trigger")?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>

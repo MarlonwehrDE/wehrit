@@ -1,0 +1,310 @@
+/* ===========================
+   DESIGN TOKENS
+   =========================== */
+
+/* @property registrations for animated custom properties */
+@property --iris-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --mesh-1x {
+  syntax: "<percentage>";
+  initial-value: 15%;
+  inherits: false;
+}
+
+@property --mesh-1y {
+  syntax: "<percentage>";
+  initial-value: 25%;
+  inherits: false;
+}
+
+@property --mesh-2x {
+  syntax: "<percentage>";
+  initial-value: 85%;
+  inherits: false;
+}
+
+@property --mesh-2y {
+  syntax: "<percentage>";
+  initial-value: 15%;
+  inherits: false;
+}
+
+@property --mesh-3x {
+  syntax: "<percentage>";
+  initial-value: 50%;
+  inherits: false;
+}
+
+@property --mesh-3y {
+  syntax: "<percentage>";
+  initial-value: 80%;
+  inherits: false;
+}
+
+@property --mesh-4x {
+  syntax: "<percentage>";
+  initial-value: 20%;
+  inherits: false;
+}
+
+@property --mesh-4y {
+  syntax: "<percentage>";
+  initial-value: 70%;
+  inherits: false;
+}
+
+/* ---- DARK MODE (default) ---- */
+:root {
+  /* Surface hierarchy */
+  --color-bg: #07070b;
+  --color-bg-elevated: #0e0e16;
+  --color-bg-overlay: #14141f;
+  --color-surface: #1a1a28;
+
+  /* Text hierarchy */
+  --color-text: #f0f0f5;
+  --color-text-secondary: #b8b8cc;
+  --color-text-muted: #8888a2;
+  --color-text-inverse: #07070b;
+
+  /* Brand purple ramp */
+  --color-primary-50: #edeafc;
+  --color-primary-100: #cfc9f5;
+  --color-primary-200: #b0a5ee;
+  --color-primary-300: #9183e6;
+  --color-primary-400: #7C6EE0;
+  --color-primary-500: #6558c7;
+  --color-primary-600: #4e42ae;
+  --color-primary-700: #382e8a;
+
+  /* Iridescent accent palette */
+  --color-iris-pink: #e879a8;
+  --color-iris-cyan: #6ee7c8;
+  --color-iris-blue: #5da5e8;
+  --color-iris-violet: #a78bfa;
+
+  /* Semantic */
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+
+  /* Glass material tokens — Apple Liquid Glass inspired */
+  --glass-blur-thin: 16px;
+  --glass-blur-medium: 32px;
+  --glass-blur-thick: 56px;
+  --glass-blur-ultra: 80px;
+
+  --glass-bg-thin: rgba(255, 255, 255, 0.08);
+  --glass-bg-medium: rgba(255, 255, 255, 0.12);
+  --glass-bg-thick: rgba(255, 255, 255, 0.16);
+  --glass-bg-ultra: rgba(255, 255, 255, 0.22);
+
+  --glass-border-subtle: rgba(255, 255, 255, 0.14);
+  --glass-border-medium: rgba(255, 255, 255, 0.22);
+  --glass-border-strong: rgba(255, 255, 255, 0.32);
+
+  --glass-highlight: rgba(255, 255, 255, 0.30);
+  --glass-shadow: rgba(0, 0, 0, 0.40);
+  --glass-inner-glow: rgba(124, 110, 224, 0.18);
+  --glass-edge-glow: rgba(124, 110, 224, 0.10);
+  --glass-refraction: rgba(255, 255, 255, 0.06);
+
+  --glass-grain-opacity: 0.035;
+
+  /* Specular highlight */
+  --glass-specular-color: rgba(255, 255, 255, 0.40);
+  --glass-specular-width: 60%;
+  --glass-specular-height: 36px;
+  --glass-specular-blur: 18px;
+
+  /* Fresnel edge */
+  --glass-fresnel-opacity: 0.10;
+  --glass-fresnel-width: 1.5px;
+  --glass-fresnel-blur: 6px;
+  --glass-fresnel-color: rgba(255, 255, 255, 0.30);
+
+  /* Caustic */
+  --glass-caustic-opacity: 0.06;
+  --glass-caustic-speed: 8s;
+
+  /* Layered shadows */
+  --glass-shadow-ambient: rgba(0, 0, 0, 0.12);
+  --glass-shadow-cast: rgba(0, 0, 0, 0.28);
+  --glass-shadow-colored: rgba(124, 110, 224, 0.08);
+
+  /* Typography */
+  --font-body: 'Inter Variable', 'Inter', system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: 'Inter Variable', 'Inter', system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8rem);
+  --text-sm: clamp(0.85rem, 0.8rem + 0.25vw, 0.9rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.05rem);
+  --text-lg: clamp(1.15rem, 1rem + 0.5vw, 1.3rem);
+  --text-xl: clamp(1.4rem, 1.2rem + 0.8vw, 1.8rem);
+  --text-2xl: clamp(1.8rem, 1.5rem + 1.2vw, 2.5rem);
+  --text-3xl: clamp(2.2rem, 1.8rem + 2vw, 3.5rem);
+  --text-hero: clamp(2.8rem, 2rem + 4vw, 6rem);
+
+  --leading-tight: 1.05;
+  --leading-snug: 1.2;
+  --leading-normal: 1.6;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+
+  /* Spacing (4px base grid) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-narrow: 800px;
+
+  /* Easing curves */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-glass: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-glacial: 800ms;
+
+  /* Liquid motion */
+  --liquid-speed: 12s;
+  --liquid-drift: 20s;
+}
+
+/* ---- LIGHT MODE (manual toggle) ---- */
+:root[data-theme="light"] {
+  --color-bg: #f5f3ff;
+  --color-bg-elevated: #ffffff;
+  --color-bg-overlay: #ede9fe;
+  --color-surface: #ddd6fe;
+
+  --color-text: #1e1b3a;
+  --color-text-secondary: #4a4570;
+  --color-text-muted: #655e82;
+  --color-text-inverse: #f0f0f5;
+
+  --color-primary-300: #6c5bbf;
+  --color-primary-400: #5a49a8;
+
+  --color-iris-pink: #d64580;
+  --color-iris-cyan: #0d9e7a;
+  --color-iris-blue: #2b7cd4;
+  --color-iris-violet: #7c3aed;
+
+  --glass-bg-thin: rgba(255, 255, 255, 0.50);
+  --glass-bg-medium: rgba(255, 255, 255, 0.65);
+  --glass-bg-thick: rgba(255, 255, 255, 0.78);
+  --glass-bg-ultra: rgba(255, 255, 255, 0.88);
+
+  --glass-border-subtle: rgba(255, 255, 255, 0.60);
+  --glass-border-medium: rgba(255, 255, 255, 0.75);
+  --glass-border-strong: rgba(255, 255, 255, 0.90);
+
+  --glass-highlight: rgba(255, 255, 255, 0.95);
+  --glass-shadow: rgba(0, 0, 0, 0.06);
+  --glass-inner-glow: rgba(124, 110, 224, 0.08);
+  --glass-edge-glow: rgba(124, 110, 224, 0.06);
+  --glass-refraction: rgba(255, 255, 255, 0.70);
+
+  --glass-grain-opacity: 0.015;
+
+  --glass-specular-color: rgba(255, 255, 255, 0.80);
+  --glass-specular-blur: 22px;
+  --glass-fresnel-opacity: 0.20;
+  --glass-fresnel-color: rgba(255, 255, 255, 0.55);
+  --glass-caustic-opacity: 0.04;
+  --glass-shadow-ambient: rgba(0, 0, 0, 0.04);
+  --glass-shadow-cast: rgba(0, 0, 0, 0.08);
+  --glass-shadow-colored: rgba(124, 110, 224, 0.04);
+}
+
+/* ---- LIGHT MODE (OS preference fallback) ---- */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --color-bg: #f5f3ff;
+    --color-bg-elevated: #ffffff;
+    --color-bg-overlay: #ede9fe;
+    --color-surface: #ddd6fe;
+
+    --color-text: #1e1b3a;
+    --color-text-secondary: #4a4570;
+    --color-text-muted: #655e82;
+    --color-text-inverse: #f0f0f5;
+
+    --color-primary-300: #6c5bbf;
+    --color-primary-400: #5a49a8;
+
+    --color-iris-pink: #d64580;
+    --color-iris-cyan: #0d9e7a;
+    --color-iris-blue: #2b7cd4;
+    --color-iris-violet: #7c3aed;
+
+    --glass-bg-thin: rgba(255, 255, 255, 0.50);
+    --glass-bg-medium: rgba(255, 255, 255, 0.65);
+    --glass-bg-thick: rgba(255, 255, 255, 0.78);
+    --glass-bg-ultra: rgba(255, 255, 255, 0.88);
+
+    --glass-border-subtle: rgba(255, 255, 255, 0.60);
+    --glass-border-medium: rgba(255, 255, 255, 0.75);
+    --glass-border-strong: rgba(255, 255, 255, 0.90);
+
+    --glass-highlight: rgba(255, 255, 255, 0.95);
+    --glass-shadow: rgba(0, 0, 0, 0.06);
+    --glass-inner-glow: rgba(124, 110, 224, 0.08);
+    --glass-edge-glow: rgba(124, 110, 224, 0.06);
+    --glass-refraction: rgba(255, 255, 255, 0.70);
+
+    --glass-grain-opacity: 0.015;
+
+    --glass-specular-color: rgba(255, 255, 255, 0.80);
+    --glass-specular-blur: 22px;
+    --glass-fresnel-opacity: 0.20;
+    --glass-fresnel-color: rgba(255, 255, 255, 0.55);
+    --glass-caustic-opacity: 0.04;
+    --glass-shadow-ambient: rgba(0, 0, 0, 0.04);
+    --glass-shadow-cast: rgba(0, 0, 0, 0.08);
+    --glass-shadow-colored: rgba(124, 110, 224, 0.04);
+  }
+}
+
+/* ---- REDUCED MOTION ---- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+    --duration-glacial: 0ms;
+    --liquid-speed: 0s;
+    --liquid-drift: 0s;
+  }
+}

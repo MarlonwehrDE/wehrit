@@ -1,0 +1,91 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import GlassCard from '../components/ui/GlassCard.astro';
+import GlassButton from '../components/ui/GlassButton.astro';
+---
+
+<PageLayout
+  title="Webdesign"
+  headline="Webdesign, das begeistert."
+  subtitle="Moderne, performante Websites — handgemacht, kein Baukasten."
+>
+  <div class="service-content">
+    <div class="service-intro" data-reveal>
+      <GlassCard level="medium" interactive>
+        <h2>Warum individueller Code?</h2>
+        <p>
+          Baukästen und CMS wie WordPress haben ihre Berechtigung — und ich setze sie ein, wenn sie passen. Aber wenn du maximale Performance, Sicherheit und Flexibilität willst, baue ich mit modernen Technologien wie Astro. Das Ergebnis: Ladezeiten unter einer Sekunde, volle Kontrolle über jedes Detail und keine Abhängigkeit von Plugins.
+        </p>
+      </GlassCard>
+    </div>
+
+    <div class="service-features" data-reveal data-reveal-stagger>
+      {[
+        { title: 'Blitzschnell', desc: 'Statische Seiten, optimierte Assets, kein Overhead. Deine Besucher warten nicht.' },
+        { title: 'SEO-optimiert', desc: 'Saubere Struktur, schnelle Ladezeiten, semantisches HTML — Google wird es lieben.' },
+        { title: 'Responsive', desc: 'Perfekt auf jedem Gerät, von Smartphone bis 4K-Monitor.' },
+        { title: 'Wartbar', desc: 'Sauberer Code, einfache Updates, keine Plugin-Hölle.' },
+      ].map((f) => (
+        <GlassCard level="thin" interactive tilt data-reveal>
+          <h3>{f.title}</h3>
+          <p>{f.desc}</p>
+        </GlassCard>
+      ))}
+    </div>
+
+    <div class="service-cta" data-reveal>
+      <GlassButton href="/kontakt" variant="primary">Website anfragen</GlassButton>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .service-content {
+    margin-top: var(--space-8);
+  }
+
+  .service-intro h2 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, var(--color-text), var(--color-primary-300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .service-intro p {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .service-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .service-features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .service-features h3 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+
+  .service-features p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .service-cta {
+    margin-top: var(--space-16);
+    text-align: center;
+  }
+</style>

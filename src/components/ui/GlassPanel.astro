@@ -1,0 +1,22 @@
+---
+interface Props {
+  level?: 'thin' | 'medium' | 'thick' | 'ultra';
+  class?: string;
+}
+
+const { level = 'thin', class: className = '' } = Astro.props;
+---
+
+<section class:list={[`glass-panel glass-${level}`, className]}>
+  <div class="container">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .glass-panel {
+    position: relative;
+    padding: var(--space-24) 0;
+    overflow: hidden;
+  }
+</style>

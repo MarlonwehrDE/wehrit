@@ -1,0 +1,183 @@
+---
+import GlassCard from './ui/GlassCard.astro';
+
+const services = [
+  {
+    title: 'Webdesign',
+    desc: 'Handgemachte Websites mit modernem Stack — blitzschnell, SEO-optimiert und auf jedem Gerät perfekt.',
+    href: '/webdesign',
+    iconPath: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+    gradient: 'var(--color-iris-cyan), var(--color-iris-blue)',
+  },
+  {
+    title: 'Softwareentwicklung',
+    desc: 'Individuelle Tools, VBA-Automatisierung und API-Integrationen — Software, die deine Prozesse beschleunigt.',
+    href: '/softwareentwicklung',
+    iconPath: 'M16 18l6-6-6-6M8 6l-6 6 6 6',
+    gradient: 'var(--color-primary-300), var(--color-iris-violet)',
+  },
+  {
+    title: 'E-Rechnung',
+    desc: 'Rechtssichere Umstellung auf ZUGFeRD / XRechnung — Analyse, Implementierung und Schulung aus einer Hand.',
+    href: '/e-rechnung',
+    iconPath: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M9 15l2 2 4-4',
+    gradient: 'var(--color-iris-pink), var(--color-primary-400)',
+  },
+];
+---
+
+<section class="services-section" id="leistungen">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-label">Leistungen</span>
+      <h2 class="section-title">Was ich für dich tun kann</h2>
+      <p class="section-subtitle">Drei Bereiche, ein Ansprechpartner — vom ersten Gespräch bis zum fertigen Produkt.</p>
+    </div>
+
+    <div class="services-grid" data-reveal data-reveal-stagger>
+      {services.map((s, i) => (
+        <div class="service-card-wrap" data-service-href={s.href}>
+          <GlassCard
+            level="medium"
+            interactive
+            iridescent={false}
+            tilt
+            data-reveal
+          >
+            <div class="service-icon-wrap" style={`--icon-gradient: linear-gradient(135deg, ${s.gradient})`}>
+              <svg class="service-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="url(#svc-grad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <defs>
+                  <linearGradient id={`svc-grad-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style={`stop-color: currentColor`} />
+                    <stop offset="100%" style={`stop-color: currentColor`} />
+                  </linearGradient>
+                </defs>
+                <path d={s.iconPath} />
+              </svg>
+            </div>
+            <h3 class="service-title">{s.title}</h3>
+            <p class="service-desc">{s.desc}</p>
+            <span class="service-link">
+              Mehr erfahren
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </GlassCard>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    position: relative;
+    padding: var(--space-32) 0;
+    overflow: visible;
+  }
+
+  .section-header {
+    margin-bottom: var(--space-16);
+    max-width: 600px;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-primary-400);
+    margin-bottom: var(--space-4);
+  }
+
+  .section-title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-text), var(--color-primary-300));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: var(--space-4);
+  }
+
+  .section-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    line-height: var(--leading-normal);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .service-icon-wrap {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--icon-gradient);
+    opacity: 0.9;
+    margin-bottom: var(--space-6);
+    transition: transform var(--duration-normal) var(--ease-spring);
+  }
+
+  :global(.glass-card:hover) .service-icon-wrap {
+    transform: scale(1.1) rotate(-3deg);
+  }
+
+  .service-icon {
+    color: white;
+    stroke: currentColor;
+  }
+
+  .service-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+  }
+
+  .service-desc {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--space-6);
+    flex-grow: 1;
+  }
+
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-primary-300);
+    transition: gap var(--duration-fast) var(--ease-out);
+  }
+
+  :global(.glass-card:hover) .service-link {
+    gap: var(--space-3);
+  }
+
+  .service-card-wrap {
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-service-href]').forEach((card) => {
+    card.addEventListener('click', () => {
+      const href = card.dataset.serviceHref;
+      if (href) window.location.href = href;
+    });
+  });
+</script>
