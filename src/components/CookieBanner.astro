@@ -110,6 +110,10 @@
     transition-delay: 0s;
   }
 
+  .cookie-banner-card :global(.glass-card-content) {
+    padding: var(--space-8) var(--space-10);
+  }
+
   .cookie-banner[aria-hidden="false"] .cookie-banner-card {
     transform: translateY(0);
     opacity: 1;
@@ -319,7 +323,17 @@
     background: rgba(0, 0, 0, 0.1);
   }
 
+  @media (max-width: 768px) {
+    .cookie-banner-card :global(.glass-card-content) {
+      padding: var(--space-6) var(--space-6);
+    }
+  }
+
   @media (max-width: 480px) {
+    .cookie-banner-card :global(.glass-card-content) {
+      padding: var(--space-5) var(--space-4);
+    }
+
     .cookie-btn {
       min-width: 0;
       flex-basis: 100%;

@@ -28,7 +28,12 @@ import { contact } from '../config/contact';
           <span>{contact.phone}</span>
         </a>
       </div>
-      <form class="contact-form" method="POST" action="#">
+      <form class="contact-form" id="contact-form" method="POST" action="/api/contact">
+        <div class="form-hp" aria-hidden="true" tabindex="-1">
+          <label for="modal-website">Website</label>
+          <input type="text" id="modal-website" name="website" autocomplete="off" tabindex="-1" />
+        </div>
+        <input type="hidden" name="_t" id="modal-timestamp" />
         <div class="form-group">
           <label for="modal-name">Name</label>
           <input type="text" id="modal-name" name="name" required class="glass-input" placeholder="Dein Name" />
@@ -50,7 +55,8 @@ import { contact } from '../config/contact';
           <label for="modal-message">Nachricht</label>
           <textarea id="modal-message" name="message" rows="4" required class="glass-input" placeholder="Erzähl mir von deinem Projekt..."></textarea>
         </div>
-        <GlassButton variant="primary">Nachricht senden</GlassButton>
+        <GlassButton variant="primary" type="submit" id="contact-submit">Nachricht senden</GlassButton>
+        <div class="form-status" id="form-status" aria-live="polite"></div>
       </form>
     </div>
   </div>
@@ -271,6 +277,30 @@ import { contact } from '../config/contact';
     }
   }
 
+  .form-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  .form-status {
+    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    min-height: 1.5em;
+  }
+
+  .form-status.success {
+    color: var(--color-accent-400, #6ee7c8);
+  }
+
+  .form-status.error {
+    color: #f87171;
+  }
+
   @media (max-width: 480px) {
     .contact-modal-content {
       padding: var(--space-6) var(--space-3) var(--space-3);
@@ -284,10 +314,15 @@ import { contact } from '../config/contact';
 
 <script>
   const modal = document.getElementById("contact-modal")!;
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const submitBtn = document.getElementById("contact-submit") as HTMLButtonElement;
+  const statusEl = document.getElementById("form-status")!;
+  const timestampInput = document.getElementById("modal-timestamp") as HTMLInputElement;
 
   function openContactModal() {
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    timestampInput.value = String(Date.now());
   }
 
   function closeContactModal() {
@@ -311,6 +346,40 @@ import { contact } from '../config/contact';
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") {
       closeContactModal();
+    }
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    const btnContent = submitBtn.querySelector(".btn-content");
+    const originalText = btnContent?.textContent ?? "";
+    if (btnContent) btnContent.textContent = "Wird gesendet...";
+    statusEl.className = "form-status";
+    statusEl.textContent = "";
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        body: new FormData(form),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.ok) {
+        statusEl.className = "form-status success";
+        statusEl.textContent = "Nachricht erfolgreich gesendet! Ich melde mich bald.";
+        form.reset();
+        timestampInput.value = String(Date.now());
+      } else {
+        statusEl.className = "form-status error";
+        statusEl.textContent = data.error ?? "Ein Fehler ist aufgetreten.";
+      }
+    } catch {
+      statusEl.className = "form-status error";
+      statusEl.textContent = "Verbindungsfehler. Bitte versuche es erneut.";
+    } finally {
+      submitBtn.disabled = false;
+      if (btnContent) btnContent.textContent = originalText;
     }
   });
 </script>
