@@ -14,7 +14,7 @@ jobs:
       - name: Node.js einrichten
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Abhaengigkeiten installieren
         run: npm ci
@@ -31,4 +31,17 @@ jobs:
         run: mkdir -p ~/.ssh && ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
       - name: Per rsync deployen
-        run: rsync -avzr --delete dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/srv/websites/wehrit/dist/
+        run: |
+          rsync -avzr --delete \
+            dist/ \
+            package.json \
+            package-lock.json \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/srv/websites/wehrit/
+
+      - name: Server neu starten
+        run: |
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+            cd /srv/websites/wehrit
+            npm ci --omit=dev
+            pm2 restart wehrit || pm2 start dist/server/entry.mjs --name wehrit
+          EOF
