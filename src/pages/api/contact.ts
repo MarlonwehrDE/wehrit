@@ -68,20 +68,21 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
     const subjectLabel = SUBJECT_LABELS[subject ?? ''] ?? subject ?? 'Kontaktanfrage';
 
+    const smtpPort = Number(process.env.SMTP_PORT) || 465;
     const transporter = nodemailer.createTransport({
-      host: import.meta.env.SMTP_HOST,
-      port: Number(import.meta.env.SMTP_PORT) || 465,
-      secure: (Number(import.meta.env.SMTP_PORT) || 465) === 465,
+      host: process.env.SMTP_HOST,
+      port: smtpPort,
+      secure: smtpPort === 465,
       auth: {
-        user: import.meta.env.SMTP_USER,
-        pass: import.meta.env.SMTP_PASS,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
 
     await transporter.sendMail({
-      from: `"WehrIT Kontaktformular" <${import.meta.env.SMTP_USER}>`,
+      from: `"WehrIT Kontaktformular" <${process.env.SMTP_USER}>`,
       replyTo: `"${name}" <${email}>`,
-      to: import.meta.env.CONTACT_TO,
+      to: process.env.CONTACT_TO,
       subject: `[WehrIT] ${subjectLabel} — ${name}`,
       text: [
         `Name: ${name}`,
